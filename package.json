@@ -1,0 +1,17 @@
+{
+  "name": "namaste-react-web-series",
+  "version": "1.0.0",
+  "description": "This is namaste react by Akshay Saini.",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "\"Lakshay Kapoor\"",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.8.3"
+  }
+}
