@@ -7,7 +7,10 @@ import Error from "./Components/Error";
 import AboutUs from "./Components/AboutUs";
 import Contact from "./Components/Contact";
 import Cart from "./Components/Cart";
+import Menu from "./Components/Menu";
+import Shimmer from "./Components/Shimmer";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+
 
 const AppLayout = () => {
   return (
@@ -30,6 +33,9 @@ children:[
     element: <AboutUs /> },
     { path: "/contact",
     element: <Contact /> },
+    { path: "/menu/:id",
+    element: <Menu />
+   },
     { path: "/cart",
     element: <Cart /> }
 ] } ]);

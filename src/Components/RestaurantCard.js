@@ -1,6 +1,7 @@
 import React from 'react'
 
 const RestaurantCard = ({restaurant}) => {
+
     const {name, id, cuisines, cloudinaryImageId} = restaurant.data
   return (
     <div className="bg-white w-48 rounded-sm p-1 text-sm m-2 overflow-clip ">
