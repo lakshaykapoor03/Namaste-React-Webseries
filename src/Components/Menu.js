@@ -1,44 +1,51 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import useMenu from "../utils.js/useMenu";
+import  addItem from "../utils.js/cartSlice";
+import { useDispatch } from "react-redux";
 
+const MenuItem = ({ item }) => {
+  const { name } = item;
 
-const MenuItem=({item})=>{
+  const dispatch = useDispatch()
 
-  const {name} = item
-return(
-  <h1>{name}</h1>
-)
-}
+  const handleAddItem = (item)=>{
+    dispatch(addItem(item))
+  }
+  return (
+    <div className="flex justify-between mx-4 items-center ">
+    <h1>{name}</h1>
+    <button onClick={()=>handleAddItem(name)} className="bg-green-600 m-2 px-2 rounded cursor-pointer">Add</button>
+    </div>
+  );
+};
 
 const Menu = () => {
 
-  const [menuItems, setMenuItems] = useState([]);
-  const {id} = useParams()
-console.log(id)
+  const { id } = useParams();
+  console.log(id);
 
+  const menuItems =  useMenu(id)
+  console.log(menuItems)
 
-    const getRestaurantMenu = async ()=>{
-        const data = await fetch (`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.38965721231865&lng=77.28755168616772&restaurantId=${id}&submitAction=ENTER`)
-        const json = await data.json()
-        console.log(json?.data?.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards[0].card.info)
-        console.log(json?.data?.cards[2].groupedCard.cardGroupMap.REGULAR.cards)
-        setMenuItems(json?.data?.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards)
-    }
+  // const dispatch = useDispatch()
 
-    useEffect(()=>{
-      getRestaurantMenu()
+  // const handleAddItem = (item)=>{
+  //   dispatch(addItem(item))
+  // }
 
-    }, [])
-  
+ 
 
   return (
     <div>
-      {
-        menuItems.map((item)=> <MenuItem item={item.card.info}/>)
-      }
+      <h1>🚀</h1>
+      {menuItems.map((item) => (
+       <MenuItem item={item.card.info}/>
+        
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default Menu;

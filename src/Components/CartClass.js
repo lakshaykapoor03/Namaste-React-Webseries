@@ -1,4 +1,6 @@
 import React from 'react'
+import UserContext from '../utils.js/UserContext';
+
 class Cart extends React.Component {
 constructor(props) {
     super(props);
@@ -22,6 +24,9 @@ constructor(props) {
 
     return (
       <div>
+       < UserContext.Consumer>
+       {({user})=> <h4>{user.name}</h4>}
+       </UserContext.Consumer>
         <h1>Hey I am class cart</h1>
       </div>
     );

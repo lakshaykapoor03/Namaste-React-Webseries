@@ -1,14 +1,16 @@
 import React from "react";
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
-import { RestaurantList } from "../../Config";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import UserContext from "../utils.js/UserContext";
+
 
 const Body = () => {
   const [restaurantCard, setRestaurantCard] = useState([]);
   const [filteredRestaurantCard, setFilteredRestaurantCard] = useState([]);
   const [searchRestaurant, setSearchRestaurant] = useState([]);
+const {user, setUser}= useContext(UserContext)
 
   const getRestaurantList = async () => {
     const data = await fetch(
@@ -19,7 +21,6 @@ const Body = () => {
     setRestaurantCard(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurantCard(json?.data?.cards[2]?.data?.data?.cards);
   };
-  // console.log(restaurantCard[0].data)
   const onSearch = (restaurantList, searchRestaurant) => {
     const filteredRestaurant = restaurantList.filter((restaurant) =>
       restaurant?.data?.name?.toLowerCase()?.includes(searchRestaurant)
@@ -33,7 +34,25 @@ const Body = () => {
 
   return (
     <div className="">
-      <div className="mx-[40%]">
+      <div className=" flex justify-between">
+      <input
+          type="text"
+          name=""
+          id=""
+          placeholder="name"
+          className="bg-[skyblue]"
+          value={user.name}
+          onChange={(e) => setUser({...user, name:e.target.value})}
+        />
+        <input
+          type="text"
+          name=""
+          id=""
+          placeholder="email"
+          className="bg-[skyblue]"
+          value={user.email}
+          onChange={(e) => setUser({...user, email:e.target.value})}
+        />
         <input
           type="text"
           name=""
@@ -42,6 +61,7 @@ const Body = () => {
           value={searchRestaurant}
           onChange={(e) => setSearchRestaurant(e.target.value)}
         />
+        
         <button
           className="bg-[green] rounded-sm text-white mx-2"
           onClick={() => {
